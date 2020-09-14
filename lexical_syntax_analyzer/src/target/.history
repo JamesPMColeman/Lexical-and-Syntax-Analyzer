@@ -1,0 +1,35 @@
+run 
+run
+run ../source1.exp
+run
+run ../source1.exp
+run ../souce1.exp
+run ../source1.exp
+run ../source2.exp
+run ../source3.exp
+run ../source4.exp
+run source1
+run source1.exp
+run ../source1.exp
+run ../source2.exp
+run ../source3.exp
+run ../source1.exp
+run ../source2.exp
+run ../source4.exp
+run ../source5.exp
+run ../source3.exp
+run ../source5.exp
+run ../source1.exp
+run ../source2.exp
+run ../source3.exp
+run ../source4.exp
+run ../source1.exp
+run ../source2.exp
+run ../source3.exp
+run ../source4.exp
+run ../source5.exp
+run ../source2.exp
+run ../source1.exp
+run source3.exp
+run ../source3.exp
+clear
