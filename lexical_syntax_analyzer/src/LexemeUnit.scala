@@ -15,6 +15,6 @@ class LexemeUnit(private var lexeme: String, private var token: Token.Value) {
   def getLexeme() = lexeme
 
   def getToken() = token
-
+  // TODO format this to string to produce cleaner out put
   override def toString: String = "(" + lexeme + "," + token + ")"
 }
