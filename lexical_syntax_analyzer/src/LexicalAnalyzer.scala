@@ -49,17 +49,17 @@ import scala.io.Source
 class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 
 	private var input = ""
-  		for (line <- Source.fromFile(source).getLines)
-    	input += line + "\n"
+  	for (line <- Source.fromFile(source).getLines) {
+		println(line)
+   		input += line + "\n"
+	}
 
   	// determines the class of a given character
   	private def getCharClass(c: Char): CharClass.Value = {
     	if (LexicalAnalyzer.LETTERS.contains(c))
       		CharClass.LETTER
     	else if (LexicalAnalyzer.DIGITS.contains(c))
-			CharClass.DIGITS
-    	else if (LexicalAnalyzer.DOLLARS.contains(c))
-      		CharClass.DOLLAR
+			CharClass.DIGIT
     	else if (LexicalAnalyzer.BLANKS.contains(c))
       		CharClass.BLANK
     	else
@@ -128,16 +128,17 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 							case "Integer" 	=> return new LexemeUnit(lexeme, Token.TYPE)
 							case "Boolean" 	=> return new LexemeUnit(lexeme, Token.TYPE)
 						}
+						println("Statement Reached")
 					}
             // Recognize a letter followed by any number of letters 
 			// and digits as an identifier
-					if (charClass == CharClass.LETTER) {
+					else if (charClass == CharClass.DIGIT) {
 						lexeme += c
 						input = input.substring(1)
 						c = input(0)
 						charClass = getCharClass(c)
-						var lettersLeft = true
-						while (input.length > 0 && lettersLeft) {
+						var lettersDigitsLeft = true
+						while (input.length > 0 && lettersDigitsLeft) {
 							c = input(0)
 							charClass = getCharClass(c)
 							if (charClass == CharClass.LETTER ||
@@ -145,7 +146,7 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 								lexeme += c
 								input = input.substring(1)
 							}		
-							else lettersLeft = false
+							else lettersDigitsLeft = false
 						}
 						return new LexemeUnit(lexeme, Token.IDENTIFIER)
 						}	
@@ -159,22 +160,22 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 } // end LexicalAnalyzer class
 
 object LexicalAnalyzer {
-  val LETTERS = "abcdefghijklmnopqrstuvwxyz"
-  val DOLLARS = "$"
-  val BLANKS  = " \n\t"
+  	val LETTERS = "abcdefghijklmnopqrstuvwxyz"
+	val DIGITS = "0123456789"
+  	val BLANKS  = " \n\t"
 
-  def main(args: Array[String]): Unit = {
+  	def main(args: Array[String]): Unit = {
     // check if source file was passed through the command-line
-    if (args.length != 1) {
-      print("Missing source file!")
-      System.exit(1)
+    	if (args.length != 1) {
+      	print("Missing source file!")
+      	System.exit(1)
     }
 
     val lex = new LexicalAnalyzer(args(0))
     val it = lex.iterator
     while (it.hasNext) {
-      val lexemeUnit = it.next()
-      println(lexemeUnit)
+      	val lexemeUnit = it.next()
+      	println(lexemeUnit)
     }
   } // end main method
 } // end LexicalAnalyzer object

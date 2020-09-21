@@ -11,19 +11,18 @@
   ***                                                            ***/
 
 object Token extends Enumeration {
-  val PROGRAM    = Value
-  val IDENTIFIER = Value
-  val VAR        = Value
-  val INTEGER    = Value
-  val BOOLEAN    = Value
-  val BEGIN      = Value
-  val READ       = Value
-  val WRITE      = Value
-  val IF         = Value
-  val THEN       = Value
-  val WHILE      = Value
-  val DO         = Value
-  val TRUE       = Value
-  val FALES      = Value
-  val EOF		 = Value
+  	val PROGRAM    = Value
+  	val IDENTIFIER = Value
+  	val VAR        = Value
+  	val TYPE	   = Value
+  	val BOOLEAN    = Value
+  	val BEGIN      = Value
+  	val READ       = Value
+  	val WRITE      = Value
+  	val IF         = Value
+   	val THEN       = Value
+  	val ELSE	   = Value
+	val WHILE      = Value
+  	val DO         = Value
+  	val EOF		   = Value
 }

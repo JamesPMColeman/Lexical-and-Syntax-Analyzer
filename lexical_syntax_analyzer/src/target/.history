@@ -34,3 +34,13 @@ run source3.exp
 run ../source3.exp
 clear
 run ../source2.pas
+run .. id_test.pas
+run ../id_test.pas
+bgRun ../id_test.pas
+last Compile / bgRun
+run last Compile
+run ../id_test.pas
+run ../do_test.pas
+run ../id_test.pas
+run ../do_test.pas
+run ../id_test.pas

@@ -1,37 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:59:31: value DIGITS is not a member of object LexicalAnalyzer[0m
-[0m[[0m[31merror[0m] [0m[0m    	else if (LexicalAnalyzer.DIGITS.contains(c))[0m
-[0m[[0m[31merror[0m] [0m[0m    	                         ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:60:14: value DIGITS is not a member of object CharClass[0m
-[0m[[0m[31merror[0m] [0m[0m			CharClass.DIGITS[0m
-[0m[[0m[31merror[0m] [0m[0m			          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:62:19: value DOLLAR is not a member of object CharClass[0m
-[0m[[0m[31merror[0m] [0m[0m      		CharClass.DOLLAR[0m
-[0m[[0m[31merror[0m] [0m[0m      		          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:116:63: value DECLARE is not a member of object Token[0m
-[0m[[0m[31merror[0m] [0m[0m							case "declare"  => return new LexemeUnit(lexeme, Token.DECLARE)[0m
-[0m[[0m[31merror[0m] [0m[0m							                                                       ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:117:63: value REAL is not a member of object Token[0m
-[0m[[0m[31merror[0m] [0m[0m							case "real"     => return new LexemeUnit(lexeme, Token.REAL)[0m
-[0m[[0m[31merror[0m] [0m[0m							                                                       ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:118:63: value COMPLEX is not a member of object Token[0m
-[0m[[0m[31merror[0m] [0m[0m							case "complex"  => return new LexemeUnit(lexeme, Token.COMPLEX)[0m
-[0m[[0m[31merror[0m] [0m[0m							                                                       ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:119:63: value FIXED is not a member of object Token[0m
-[0m[[0m[31merror[0m] [0m[0m							case "fixed"    => return new LexemeUnit(lexeme, Token.FIXED) [0m
-[0m[[0m[31merror[0m] [0m[0m							                                                       ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:120:63: value FLOATING is not a member of object Token[0m
-[0m[[0m[31merror[0m] [0m[0m							case "floating" => return new LexemeUnit(lexeme, Token.FLOATING)[0m
-[0m[[0m[31merror[0m] [0m[0m							                                                       ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:121:63: value SINGLE is not a member of object Token[0m
-[0m[[0m[31merror[0m] [0m[0m							case "single"   => return new LexemeUnit(lexeme, Token.SINGLE)[0m
-[0m[[0m[31merror[0m] [0m[0m							                                                       ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:122:63: value DOUBLE is not a member of object Token[0m
-[0m[[0m[31merror[0m] [0m[0m							case "double"   => return new LexemeUnit(lexeme, Token.DOUBLE)[0m
-[0m[[0m[31merror[0m] [0m[0m							                                                       ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:123:63: value BINARY is not a member of object Token[0m
-[0m[[0m[31merror[0m] [0m[0m							case "binary"   => return new LexemeUnit(lexeme, Token.BINARY)[0m
-[0m[[0m[31merror[0m] [0m[0m							                                                       ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:124:63: value DECIMAL is not a member of object Token[0m
-[0m[[0m[31merror[0m] [0m[0m							case "decimal"  => return new LexemeUnit(lexeme, Token.DECIMAL)[0m
-[0m[[0m[31merror[0m] [0m[0m							                                                       ^[0m
-[0m[[0m[31merror[0m] [0m[0m12 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:130:25: not found: value break[0m
+[0m[[0m[31merror[0m] [0m[0m							case default 	=> break[0m
+[0m[[0m[31merror[0m] [0m[0m							             	   ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
