@@ -24,5 +24,16 @@ object Token extends Enumeration {
   	val ELSE	   = Value
 	val WHILE      = Value
   	val DO         = Value
+  	val COLON      = Value
+  	val SEMI_COLON = Value
+	val ASSIGN     = Value
+  	val EQUAL      = Value
+  	val PLUS       = Value
+  	val MINUS      = Value
+  	val MULTIPLY   = Value
+  	val GREATER    = Value
+    val LESS       = Value
+  	val GREATEREQ  = Value
+	val LESSEQ	   = Value
   	val EOF		   = Value
 }

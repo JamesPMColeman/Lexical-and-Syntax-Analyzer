@@ -60,6 +60,8 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
       		CharClass.LETTER
     	else if (LexicalAnalyzer.DIGITS.contains(c))
 			CharClass.DIGIT
+		else if (LexicalAnalyzer.SYMBOLS.contains(c))
+			CharClass.SYMBOL
     	else if (LexicalAnalyzer.BLANKS.contains(c))
       		CharClass.BLANK
     	else
@@ -75,63 +77,91 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
         		input = input.substring(1)
       		else
         		foundNonBlank = true
-    	}
+	   	}
   	}
 
-  	def iterator: Iterator[LexemeUnit] = {
-    	new Iterator[LexemeUnit] {
+	def iterator: Iterator[LexemeUnit] = {
+		new Iterator[LexemeUnit] {
 
-      	override def hasNext: Boolean = {
-        	readBlanks
-        	input.length > 0
-      	}
+			override def hasNext: Boolean = {
+				readBlanks
+				input.length > 0
+			}
 
-      	override def next(): LexemeUnit = {
-        	if (!hasNext)
-          		new LexemeUnit("", Token.EOF)
-        	else {
-          		var lexeme = ""
-          		readBlanks
-          		if (input.length == 0)
-            		new LexemeUnit(lexeme, Token.EOF)
-          		else {
-            		var c = input(0)
-            		var charClass = getCharClass(c)
+	      	override def next(): LexemeUnit = {
+    	    	if (!hasNext)
+        	  		new LexemeUnit("", Token.EOF)
+        		else {
+          			var lexeme = ""
+	          		readBlanks
+    	      		if (input.length == 0)
+        	    		new LexemeUnit(lexeme, Token.EOF)
+          			else {
+            			var c = input(0)
+            			var charClass = getCharClass(c)
 	
-            // Recognize special words
-					if (charClass == CharClass.LETTER) {
-						lexeme += c
-						input = input.substring(1)
-						var lettersDigitsLeft = true
-						while (input.length > 0 && lettersDigitsLeft) {
-							c = input(0)
-							charClass = getCharClass(c)
-							if (charClass == CharClass.LETTER ||
-								charClass == CharClass.DIGIT) {
-								lexeme += c
-								input = input.substring(1)
-							}		
-							else lettersDigitsLeft = false
-						}							
-						lexeme match {
-							case "program"  => return new LexemeUnit(lexeme, Token.PROGRAM)
-							case "var"      => return new LexemeUnit(lexeme, Token.VAR)
-							case "begin"    => return new LexemeUnit(lexeme, Token.BEGIN)
-							case "read"     => return new LexemeUnit(lexeme, Token.READ) 
-							case "write" 	=> return new LexemeUnit(lexeme, Token.WRITE)
-							case "if"   	=> return new LexemeUnit(lexeme, Token.IF)
-							case "then"   	=> return new LexemeUnit(lexeme, Token.THEN)
-							case "else"   	=> return new LexemeUnit(lexeme, Token.ELSE)
-							case "while"  	=> return new LexemeUnit(lexeme, Token.WHILE)
-							case "do"  		=> return new LexemeUnit(lexeme, Token.DO)
-							case "true"  	=> return new LexemeUnit(lexeme, Token.BOOLEAN)
-							case "false"	=> return new LexemeUnit(lexeme, Token.BOOLEAN)
-							case "Integer" 	=> return new LexemeUnit(lexeme, Token.TYPE)
-							case "Boolean" 	=> return new LexemeUnit(lexeme, Token.TYPE)
-							case default    => return new LexemeUnit(lexeme, Token.IDENTIFIER)
+            // Recognize special words and identifiers
+						if (charClass == CharClass.LETTER) {
+							lexeme += c
+							input = input.substring(1)
+							var lettersDigitsLeft = true
+							while (input.length > 0 && lettersDigitsLeft) {
+								c = input(0)
+								charClass = getCharClass(c)
+								if (charClass == CharClass.LETTER ||
+									charClass == CharClass.DIGIT) {
+									lexeme += c
+									input = input.substring(1)
+								}		
+								else lettersDigitsLeft = false
+							}							
+							lexeme match {
+								case "program"  => return new LexemeUnit(lexeme, Token.PROGRAM)
+								case "var"      => return new LexemeUnit(lexeme, Token.VAR)
+								case "begin"    => return new LexemeUnit(lexeme, Token.BEGIN)
+								case "read"     => return new LexemeUnit(lexeme, Token.READ) 
+								case "write" 	=> return new LexemeUnit(lexeme, Token.WRITE)
+								case "if"   	=> return new LexemeUnit(lexeme, Token.IF)
+								case "then"   	=> return new LexemeUnit(lexeme, Token.THEN)
+								case "else"   	=> return new LexemeUnit(lexeme, Token.ELSE)
+								case "while"  	=> return new LexemeUnit(lexeme, Token.WHILE)
+								case "do"  		=> return new LexemeUnit(lexeme, Token.DO)
+								case "true"  	=> return new LexemeUnit(lexeme, Token.BOOLEAN)
+								case "false"	=> return new LexemeUnit(lexeme, Token.BOOLEAN)
+								case "Integer" 	=> return new LexemeUnit(lexeme, Token.TYPE)
+								case "Boolean" 	=> return new LexemeUnit(lexeme, Token.TYPE)
+								case default    => return new LexemeUnit(lexeme, Token.IDENTIFIER)
+							}
+							println("Statement Reached")
 						}
-						println("Statement Reached")
-					}
+						else if (charClass == CharClass.SYMBOL) {
+							lexem += c
+							input = input.substring(1)
+							var symbolsLeft = true
+							while (input.length > 0 && symbolsLeft) {
+								c = input(0)
+								charClass = getCharClass(c)
+								if (character == CharClass.SYMBOLS) {
+									lexeme += c
+									input = input.substring(1)
+								}
+								else symbolsLeft = false
+							}
+							if (lexem.length == 2 && lexem == ":=") 
+								return new LexemeUnit(lexem, Token.ASSIGN)
+							else if (lexem.length == 1) {
+								lexem match {
+									case ":" => return new LexemeUnit(lexem, Token.COLON)
+									case ";" => return new LexemeUnit(lexem, Token.SEMI_COLON)
+									case "." => return new LexemeUnit(lexem, Token.EOF)
+									case "+" => return new LexemeUnit(lexem, Token.PLUS)
+									case "-" => return new LexemeUnit(lexem, Token.)
+									case "*" => return new LexemeUnit(lexem, Token.COLON)
+									case ">" => return new LexemeUnit(lexem, Token.COLON)
+									case "<" => return new LexemeUnit(lexem, Token.COLON)
+								}
+							} 
+						}	
 					}
 			// throw an exception if an unrecognizable symbol is found
 					throw new Exception("Lexical Analyzer Error: unrecognizable symbol found!")	
@@ -144,6 +174,7 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 object LexicalAnalyzer {
   	val LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	val DIGITS = "0123456789"
+	val SYMBOLS = ":;.=+-*><"
   	val BLANKS  = " \n\t"
 
   	def main(args: Array[String]): Unit = {
