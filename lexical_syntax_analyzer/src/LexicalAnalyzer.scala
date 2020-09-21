@@ -102,15 +102,16 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 					if (charClass == CharClass.LETTER) {
 						lexeme += c
 						input = input.substring(1)
-						var lettersLeft = true
-						while (input.length > 0 && lettersLeft) {
+						var lettersDigitsLeft = true
+						while (input.length > 0 && lettersDigitsLeft) {
 							c = input(0)
 							charClass = getCharClass(c)
-							if (charClass == CharClass.LETTER) {
-								lexeme += input(0)
+							if (charClass == CharClass.LETTER ||
+								charClass == CharClass.DIGIT) {
+								lexeme += c
 								input = input.substring(1)
-							}
-							else lettersLeft = false
+							}		
+							else lettersDigitsLeft = false
 						}							
 						lexeme match {
 							case "program"  => return new LexemeUnit(lexeme, Token.PROGRAM)
@@ -127,12 +128,13 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 							case "false"	=> return new LexemeUnit(lexeme, Token.BOOLEAN)
 							case "Integer" 	=> return new LexemeUnit(lexeme, Token.TYPE)
 							case "Boolean" 	=> return new LexemeUnit(lexeme, Token.TYPE)
+							case default    => return new LexemeUnit(lexeme, Token.IDENTIFIER)
 						}
 						println("Statement Reached")
 					}
             // Recognize a letter followed by any number of letters 
 			// and digits as an identifier
-					else if (charClass == CharClass.DIGIT) {
+		/*			else if (charClass == CharClass.DIGIT) {
 						lexeme += c
 						input = input.substring(1)
 						c = input(0)
@@ -149,7 +151,7 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 							else lettersDigitsLeft = false
 						}
 						return new LexemeUnit(lexeme, Token.IDENTIFIER)
-						}	
+						}*/	
 					}
 			// throw an exception if an unrecognizable symbol is found
 					throw new Exception("Lexical Analyzer Error: unrecognizable symbol found!")	

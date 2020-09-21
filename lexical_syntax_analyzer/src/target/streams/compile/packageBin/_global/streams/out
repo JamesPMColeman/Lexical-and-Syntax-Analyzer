@@ -1,1 +1,19 @@
-[0m[[0m[0mdebug[0m] [0m[0mJar uptodate: /Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/target/scala-2.12/src_2.12-0.1.0-SNAPSHOT.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/target/scala-2.12/src_2.12-0.1.0-SNAPSHOT.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	LexicalAnalyzer$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/target/scala-2.12/classes/LexicalAnalyzer$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	LexicalAnalyzer.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/target/scala-2.12/classes/LexicalAnalyzer.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CharClass.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/target/scala-2.12/classes/CharClass.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	LexemeUnit.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/target/scala-2.12/classes/LexemeUnit.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CharClass$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/target/scala-2.12/classes/CharClass$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Token$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/target/scala-2.12/classes/Token$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Token.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/target/scala-2.12/classes/Token.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	LexicalAnalyzer$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/target/scala-2.12/classes/LexicalAnalyzer$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
