@@ -41,7 +41,7 @@ import scala.io.Source
 				 | arithm_expr ( ´>´ | ´>=´ | ´=´ | ´<=´ | ´<´ ) arithm_expr 
 	letter 		 = ´a´ | ´b´ | ´c´ | ´d´ | ´e´ | ´f´ | ´g´ | ´h´ | ´i´ | ´j´ | ´k´ | ´l´ 
 				 | ´m´ | ´n´ | ´o´ | ´p´ | ´q´ | ´r´ | ´s´ | ´t´ | ´u´ | ´v´ | ´w´ | ´x´ 
-				 | ´y´ | ´z´ 
+				 | ´y´ | ´z´ | also upper case letters 
 	digit 		 = ´0´ | ´1´ | ´2´ | ´3´ | ´4´ | ´5´ | ´6´ | ´7´ | ´8´ | ´9´
  
 */
@@ -132,26 +132,6 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 						}
 						println("Statement Reached")
 					}
-            // Recognize a letter followed by any number of letters 
-			// and digits as an identifier
-		/*			else if (charClass == CharClass.DIGIT) {
-						lexeme += c
-						input = input.substring(1)
-						c = input(0)
-						charClass = getCharClass(c)
-						var lettersDigitsLeft = true
-						while (input.length > 0 && lettersDigitsLeft) {
-							c = input(0)
-							charClass = getCharClass(c)
-							if (charClass == CharClass.LETTER ||
-								charClass == CharClass.DIGIT) {
-								lexeme += c
-								input = input.substring(1)
-							}		
-							else lettersDigitsLeft = false
-						}
-						return new LexemeUnit(lexeme, Token.IDENTIFIER)
-						}*/	
 					}
 			// throw an exception if an unrecognizable symbol is found
 					throw new Exception("Lexical Analyzer Error: unrecognizable symbol found!")	
@@ -162,7 +142,7 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 } // end LexicalAnalyzer class
 
 object LexicalAnalyzer {
-  	val LETTERS = "abcdefghijklmnopqrstuvwxyz"
+  	val LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	val DIGITS = "0123456789"
   	val BLANKS  = " \n\t"
 
