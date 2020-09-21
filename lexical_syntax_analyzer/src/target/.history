@@ -33,3 +33,4 @@ run ../source1.exp
 run source3.exp
 run ../source3.exp
 clear
+run ../source2.pas

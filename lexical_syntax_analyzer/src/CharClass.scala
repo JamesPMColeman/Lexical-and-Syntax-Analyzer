@@ -11,9 +11,10 @@
   ***                                                            ***/
 
 object CharClass extends Enumeration {
-  val LETTER      = Value
-  val PUNCTUATION = Value
-  val OPERATORS   = Value
-  val BLANK       = Value
-  val OTHER       = Value
+  	val LETTER      = Value
+    val DIGIT		= Value
+	val PUNCTUATION = Value
+  	val OPERATORS   = Value
+  	val BLANK       = Value
+  	val OTHER       = Value
 }

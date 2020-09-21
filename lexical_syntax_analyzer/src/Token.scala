@@ -25,5 +25,5 @@ object Token extends Enumeration {
   val DO         = Value
   val TRUE       = Value
   val FALES      = Value
-  val EOF	 = Value
+  val EOF		 = Value
 }
