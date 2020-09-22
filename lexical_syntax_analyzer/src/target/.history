@@ -47,3 +47,23 @@ run ../id_test.pas
 run ../source1.pas
 run ../id_test.pas
 run ../source1.pas
+(program,PROGRAM)
+(Source1,IDENTIFIER)
+(var,VAR)
+(x1,IDENTIFIER)
+(x2,IDENTIFIER)
+run ../source1.pas
+run ../source2.pas
+run ../source3.pas
+run ../source4.pas
+run ../source5.pas
+run ../source6.pas
+run ../source7.pas
+run ../source8.pas
+run ../source9.pas
+run ../source10.pas
+run ../source11.pas
+run ../source12.pas
+run ../source13.pas
+run ../source14.pas
+run ../source15.pas

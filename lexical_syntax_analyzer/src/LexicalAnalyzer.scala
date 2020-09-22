@@ -130,37 +130,52 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 								case "false"	=> return new LexemeUnit(lexeme, Token.BOOLEAN)
 								case "Integer" 	=> return new LexemeUnit(lexeme, Token.TYPE)
 								case "Boolean" 	=> return new LexemeUnit(lexeme, Token.TYPE)
+								case "end"	 	=> return new LexemeUnit(lexeme, Token.END)
 								case default    => return new LexemeUnit(lexeme, Token.IDENTIFIER)
 							}
 							println("Statement Reached")
 						}
 						else if (charClass == CharClass.SYMBOL) {
-							lexem += c
+							lexeme += c
 							input = input.substring(1)
 							var symbolsLeft = true
 							while (input.length > 0 && symbolsLeft) {
 								c = input(0)
 								charClass = getCharClass(c)
-								if (character == CharClass.SYMBOLS) {
+								if (charClass == CharClass.SYMBOL) {
 									lexeme += c
 									input = input.substring(1)
 								}
 								else symbolsLeft = false
 							}
-							if (lexem.length == 2 && lexem == ":=") 
-								return new LexemeUnit(lexem, Token.ASSIGN)
-							else if (lexem.length == 1) {
-								lexem match {
-									case ":" => return new LexemeUnit(lexem, Token.COLON)
-									case ";" => return new LexemeUnit(lexem, Token.SEMI_COLON)
-									case "." => return new LexemeUnit(lexem, Token.EOF)
-									case "+" => return new LexemeUnit(lexem, Token.PLUS)
-									case "-" => return new LexemeUnit(lexem, Token.)
-									case "*" => return new LexemeUnit(lexem, Token.COLON)
-									case ">" => return new LexemeUnit(lexem, Token.COLON)
-									case "<" => return new LexemeUnit(lexem, Token.COLON)
-								}
+							lexeme match {
+								case ":" => return new LexemeUnit(lexeme, Token.COLON)
+								case ";" => return new LexemeUnit(lexeme, Token.SEMI_COLON)
+								case "." => return new LexemeUnit(lexeme, Token.EOF)
+								case "+" => return new LexemeUnit(lexeme, Token.PLUS)
+								case "-" => return new LexemeUnit(lexeme, Token.MINUS)
+								case "*" => return new LexemeUnit(lexeme, Token.MULTIPLIER)
+								case ">" => return new LexemeUnit(lexeme, Token.GREATER_THAN)
+								case "<" => return new LexemeUnit(lexeme, Token.LESS_THAN)
+								case "<=" => return new LexemeUnit(lexeme, Token.LESS_EQUAL)
+								case ">=" => return new LexemeUnit(lexeme, Token.GREATER_EQUAL)
+								case ":=" => return new LexemeUnit(lexeme, Token.ASSIGN)
 							} 
+						}
+						else if (charClass == CharClass.DIGIT) {
+							lexeme += c
+							input = input.substring(1)
+							var digitsLeft = true
+							while (input.length > 0 && digitsLeft) {
+								c = input(0)
+								charClass = getCharClass(c)
+								if (charClass == CharClass.SYMBOL) {
+									lexeme += c
+									input = input.substring(1)
+								}
+								else digitsLeft = false
+							}
+							return new LexemeUnit(lexeme, Token.INT_LITERAL)
 						}	
 					}
 			// throw an exception if an unrecognizable symbol is found

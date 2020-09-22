@@ -1,7 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:106:34: not found: value lettersDigitsLeft[0m
-[0m[[0m[31merror[0m] [0m[0m						while (input.length > 0 && lettersDigitsLeft) {[0m
-[0m[[0m[31merror[0m] [0m[0m						                           ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:114:13: not found: value lettersDigitsLeft[0m
-[0m[[0m[31merror[0m] [0m[0m							else lettersDigitsLeft = false[0m
-[0m[[0m[31merror[0m] [0m[0m							     ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:178:44: value INT_LITERAL is not a member of object Token[0m
+[0m[[0m[31merror[0m] [0m[0m							return new LexemeUnit(lexeme, Token.INT_LITERAL)[0m
+[0m[[0m[31merror[0m] [0m[0m							                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
