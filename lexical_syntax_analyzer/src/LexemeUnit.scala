@@ -10,7 +10,7 @@
   *** 20FCS3210/tree/master/activity_05_lexical_analyzer/src     ***  
   ***                                                            ***/
 
-class LexemeUnit(private var lexeme: String, private var token: Token.Value) {
+class LexemeUnit(private var lexeme: String, private var token: Int) {
 
   	def getLexeme() = lexeme
 

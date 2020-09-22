@@ -135,31 +135,49 @@ class SyntaxAnalyzer(private var source: String) {
 }
 
 object SyntaxAnalyzer {
+    
+  	val GRAMMAR_FILENAME   = "../grammar.txt"
+  	val SLR_TABLE_FILENAME = "../parse_table.csv"
+	
+	val TOKEN_PROGRAM         = 0
+    val TOKEN_IDENTIFIER      = 1
+    val TOKEN_INT_LITERAL     = 2
+    val TOKEN_VAR             = 3
+    val TOKEN_TYPE            = 4
+    val TOKEN_BOOLEAN         = 5
+    val TOKEN_BEGIN           = 6
+    val TOKEN_READ            = 7
+    val TOKEN_WRITE           = 8
+    val TOKEN_IF              = 9
+    val TOKEN_THEN            = 10
+    val TOKEN_ELSE            = 11
+    val TOKEN_WHILE           = 12
+    val TOKEN_DO              = 13
+    val TOKEN_COLON           = 14
+    val TOKEN_SEMI_COLON      = 15
+    val TOKEN_ASSIGN          = 16
+    val TOKEN_EQUAL           = 17
+    val TOKEN_PLUS            = 18
+    val TOKEN_MINUS           = 19
+    val TOKEN_MULTIPLIER      = 20
+    val TOKEN_GREATER_THAN    = 21
+    val TOKEN_LESS_THAN       = 22
+    val TOKEN_GREATER_EQUAL   = 23
+    val TOKEN_LESS_EQUAL      = 24
+    val TOKEN_END             = 25
+    val TOKEN_EOF             = 26
 
-  val GRAMMAR_FILENAME   = "../grammar.txt"
-  val SLR_TABLE_FILENAME = "../slr_table.csv"
+  	val DEBUG = false
 
-  val TOKEN_EOF        = 0
-  val TOKEN_ADD_OP     = 1
-  val TOKEN_SUB_OP     = 2
-  val TOKEN_MUL_OP     = 3
-  val TOKEN_DIV_OP     = 4
-  val TOKEN_IDENTIFIER = 5
-  val TOKEN_LITERAL    = 6
-  val TOKEN_OPEN_PAR   = 7
-  val TOKEN_CLOSE_PAR  = 8
-
-  val DEBUG = false
-
-  def main(args: Array[String]): Unit = {
+  	def main(args: Array[String]): Unit = {
     // check if source file was passed through the command-line
-    if (args.length != 1) {
-      print("Missing source file!")
-      System.exit(1)
-    }
+    	if (args.length != 1) {
+      		print("Missing source file!")
+      		System.exit(1)
+    	}
 
-    val syntaxAnalyzer = new SyntaxAnalyzer(args(0))
-    val parseTree = syntaxAnalyzer.parse()
-    print(parseTree)
-  }
+    	val syntaxAnalyzer = new SyntaxAnalyzer(args(0))
+    	val parseTree = syntaxAnalyzer.parse()
+    	print(parseTree)
+  	}	
 }

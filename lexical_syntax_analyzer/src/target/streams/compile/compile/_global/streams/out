@@ -1,6 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:66:46: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : Token.Value[0m
-[0m[[0m[31merror[0m] [0m[0m required: Int[0m
-[0m[[0m[31merror[0m] [0m[0m      val action = slrTable.getAction(state, token)[0m
-[0m[[0m[31merror[0m] [0m[0m                                             ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:169:7: TOKEN_EOF is already defined as value TOKEN_EOF[0m
+[0m[[0m[31merror[0m] [0m[0m  val TOKEN_EOF        = 0[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:174:7: TOKEN_IDENTIFIER is already defined as value TOKEN_IDENTIFIER[0m
+[0m[[0m[31merror[0m] [0m[0m  val TOKEN_IDENTIFIER = 5[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

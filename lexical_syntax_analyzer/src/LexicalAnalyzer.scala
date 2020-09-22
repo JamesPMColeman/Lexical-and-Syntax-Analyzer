@@ -90,12 +90,12 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 
 	      	override def next(): LexemeUnit = {
     	    	if (!hasNext)
-        	  		new LexemeUnit("", Token.EOF)
+        	  		new LexemeUnit("", SyntaxAnalyzer.TOKEN_EOF)
         		else {
           			var lexeme = ""
 	          		readBlanks
     	      		if (input.length == 0)
-        	    		new LexemeUnit(lexeme, Token.EOF)
+        	    		new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_EOF)
           			else {
             			var c = input(0)
             			var charClass = getCharClass(c)
@@ -116,22 +116,22 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 								else lettersDigitsLeft = false
 							}							
 							lexeme match {
-								case "program"  => return new LexemeUnit(lexeme, Token.PROGRAM)
-								case "var"      => return new LexemeUnit(lexeme, Token.VAR)
-								case "begin"    => return new LexemeUnit(lexeme, Token.BEGIN)
-								case "read"     => return new LexemeUnit(lexeme, Token.READ) 
-								case "write" 	=> return new LexemeUnit(lexeme, Token.WRITE)
-								case "if"   	=> return new LexemeUnit(lexeme, Token.IF)
-								case "then"   	=> return new LexemeUnit(lexeme, Token.THEN)
-								case "else"   	=> return new LexemeUnit(lexeme, Token.ELSE)
-								case "while"  	=> return new LexemeUnit(lexeme, Token.WHILE)
-								case "do"  		=> return new LexemeUnit(lexeme, Token.DO)
-								case "true"  	=> return new LexemeUnit(lexeme, Token.BOOLEAN)
-								case "false"	=> return new LexemeUnit(lexeme, Token.BOOLEAN)
-								case "Integer" 	=> return new LexemeUnit(lexeme, Token.TYPE)
-								case "Boolean" 	=> return new LexemeUnit(lexeme, Token.TYPE)
-								case "end"	 	=> return new LexemeUnit(lexeme, Token.END)
-								case default    => return new LexemeUnit(lexeme, Token.IDENTIFIER)
+								case "program"  => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_PROGRAM)
+								case "var"      => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_VAR)
+								case "begin"    => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_BEGIN)
+								case "read"     => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_READ) 
+								case "write" 	=> return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_WRITE)
+								case "if"   	=> return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_IF)
+								case "then"   	=> return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_THEN)
+								case "else"   	=> return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_ELSE)
+								case "while"  	=> return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_WHILE)
+								case "do"  		=> return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_DO)
+								case "true"  	=> return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_BOOLEAN)
+								case "false"	=> return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_BOOLEAN)
+								case "Integer" 	=> return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_TYPE)
+								case "Boolean" 	=> return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_TYPE)
+								case "end"	 	=> return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_END)
+								case default    => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_IDENTIFIER)
 							}
 							println("Statement Reached")
 						}
@@ -149,17 +149,17 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 								else symbolsLeft = false
 							}
 							lexeme match {
-								case ":" => return new LexemeUnit(lexeme, Token.COLON)
-								case ";" => return new LexemeUnit(lexeme, Token.SEMI_COLON)
-								case "." => return new LexemeUnit(lexeme, Token.EOF)
-								case "+" => return new LexemeUnit(lexeme, Token.PLUS)
-								case "-" => return new LexemeUnit(lexeme, Token.MINUS)
-								case "*" => return new LexemeUnit(lexeme, Token.MULTIPLIER)
-								case ">" => return new LexemeUnit(lexeme, Token.GREATER_THAN)
-								case "<" => return new LexemeUnit(lexeme, Token.LESS_THAN)
-								case "<=" => return new LexemeUnit(lexeme, Token.LESS_EQUAL)
-								case ">=" => return new LexemeUnit(lexeme, Token.GREATER_EQUAL)
-								case ":=" => return new LexemeUnit(lexeme, Token.ASSIGN)
+								case ":" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_COLON)
+								case ";" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_SEMI_COLON)
+								case "." => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_EOF)
+								case "+" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_PLUS)
+								case "-" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_MINUS)
+								case "*" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_MULTIPLIER)
+								case ">" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_GREATER_THAN)
+								case "<" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_LESS_THAN)
+								case "<=" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_LESS_EQUAL)
+								case ">=" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_GREATER_EQUAL)
+								case ":=" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_ASSIGN)
 							} 
 						}
 						else if (charClass == CharClass.DIGIT) {
@@ -175,7 +175,7 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 								}
 								else digitsLeft = false
 							}
-							return new LexemeUnit(lexeme, Token.INT_LITERAL)
+							return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_INT_LITERAL)
 						}	
 					}
 			// throw an exception if an unrecognizable symbol is found
