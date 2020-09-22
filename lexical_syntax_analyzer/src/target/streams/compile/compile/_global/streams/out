@@ -1,4 +1,6 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/LexicalAnalyzer.scala:178:44: value INT_LITERAL is not a member of object Token[0m
-[0m[[0m[31merror[0m] [0m[0m							return new LexemeUnit(lexeme, Token.INT_LITERAL)[0m
-[0m[[0m[31merror[0m] [0m[0m							                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:66:46: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Token.Value[0m
+[0m[[0m[31merror[0m] [0m[0m required: Int[0m
+[0m[[0m[31merror[0m] [0m[0m      val action = slrTable.getAction(state, token)[0m
+[0m[[0m[31merror[0m] [0m[0m                                             ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
