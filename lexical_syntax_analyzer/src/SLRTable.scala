@@ -13,10 +13,17 @@ class SLRTable(private var source: String) {
 
   	val input = Source.fromFile(source).getLines()
   	val header = input.next().split(",")
-  	val eof = header.indexOf("0")
-  	val tokens = for (i <- 1 to eof) yield header(i).toInt
-  	val variables = for (i <- eof + 1 until header.length) yield header(i)
-  	while (input.hasNext) {
+	val eof = header.indexOf("0")
+	val tokens = for (i <- 1 to eof) yield header(i).toInt
+	val variables = for (i <- eof + 1 until header.length) yield header(i)
+	if (SyntaxAnalyzer.DEBUG) {
+		println("Input: " + input)
+  		println("Header: " + header)
+  		println("End of File" + eof)
+		println("Tokens: " + tokens)
+  		println("Variables: " + variables)
+	}
+	while (input.hasNext) {
     	val line = input.next() + " "
     	val row = line.split(",")
     	val state = row(0).toInt
@@ -29,7 +36,7 @@ class SLRTable(private var source: String) {
     	for (i <- 0 until variables.length) {
       		val variable = variables(i)
       		val key = (state, variable)
-      		val value = row(tokens.length + i + 1)
+      		val value = row(tokens.length + i + 1) 
       		gotos(key) = value
     	}
   	}

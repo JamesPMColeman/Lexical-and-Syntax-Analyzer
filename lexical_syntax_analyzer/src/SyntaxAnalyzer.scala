@@ -24,114 +24,116 @@ digit       = ´0´ | ´1´ | ´2´ | ´3´ | ´4´ | ´5´ | ´6´ | ´7´ | ´
 
 class SyntaxAnalyzer(private var source: String) {
 
-  private val it = new LexicalAnalyzer(source).iterator
-  private var lexemeUnit: LexemeUnit = null
-  private val grammar = new Grammar(GRAMMAR_FILENAME)
-  private val slrTable = new SLRTable(SLR_TABLE_FILENAME)
+  	private val it = new LexicalAnalyzer(source).iterator
+  	private var lexemeUnit: LexemeUnit = null
+  	private val grammar = new Grammar(GRAMMAR_FILENAME)
+  	private val slrTable = new SLRTable(SLR_TABLE_FILENAME)
 
-  private def getLexemeUnit() = {
-    if (lexemeUnit == null)
-      lexemeUnit = it.next()
-    if (SyntaxAnalyzer.DEBUG)
-      println("lexemeUnit: " + lexemeUnit)
-  }
+  	private def getLexemeUnit() = {
+    	if (lexemeUnit == null)
+      		lexemeUnit = it.next()
+    	if (SyntaxAnalyzer.DEBUG)
+      		println("lexemeUnit: " + lexemeUnit)
+  	}
 
-  def parse(): Tree = {
+  	def parse(): Tree = {
 
     // TODO: create a stack of trees
-    val trees: ArrayBuffer[Tree] = new ArrayBuffer[Tree]
+    	val trees: ArrayBuffer[Tree] = new ArrayBuffer[Tree]
 
     // TODO: initialize the parser's stack of (state, symbol) pairs
-    val stack: ArrayBuffer[String] = new ArrayBuffer[String]
-    stack.append("0")
+    	val stack: ArrayBuffer[String] = new ArrayBuffer[String]
+    	stack.append("0")
 
     // TODO: main parser loop
-    while (true) {
+    	while (true) {
 
-      if (SyntaxAnalyzer.DEBUG)
-        println("stack: " + stack.mkString(","))
+      		if (SyntaxAnalyzer.DEBUG)
+        		println("stack: " + stack.mkString(","))
 
       // TODO: update lexeme unit (if needed)
-      getLexemeUnit()
+      		getLexemeUnit()
 
       // TODO: get current state
-      var state = stack.last.strip().toInt
-      if (SyntaxAnalyzer.DEBUG)
-        println("state: " + state)
+      		var state = stack.last.strip().toInt
+      		if (SyntaxAnalyzer.DEBUG)
+        		println("state: " + state)
 
       // TODO: get current token
-      val token = lexemeUnit.getToken()
+      		val token = lexemeUnit.getToken()
+				if (SyntaxAnalyzer.DEBUG)
+					println("Token: " + token)
 
       // TODO: get action
-      val action = slrTable.getAction(state, token)
-      if (SyntaxAnalyzer.DEBUG)
-        println("action: " + action)
+      		val action = slrTable.getAction(state, token)
+      			if (SyntaxAnalyzer.DEBUG)
+        			println("action: " + action)
 
       // TODO: if action is undefined, throw an exception
-      if (action.length == 0)
-        throw new Exception("Syntax Analyzer Error!")
+      		if (action.length == 0)
+        		throw new Exception("Syntax Analyzer Error!")
 
       // TODO: implement the "shift" operation if the action's prefix is "s"
-      if (action(0) == 's') {
+      		if (action(0) == 's') {
 
         // TODO: update the parser's stack
-        stack.append(token + "")
-        stack.append(action.substring(1))
+        		stack.append(token + "")
+        		stack.append(action.substring(1))
 
         // TODO: create a new tree with the lexeme
-        val tree = new Tree(lexemeUnit.getLexeme())
+        		val tree = new Tree(lexemeUnit.getLexeme())
 
         // TODO: push the new tree onto the stack of trees
-        trees.append(tree)
+        		trees.append(tree)
 
         // TODO: update lexemeUnit to null to acknowledge reading the input
-        lexemeUnit = null
-      }
+        		lexemeUnit = null
+      		}
       // TODO: implement the "reduce" operation if the action's prefix is "r"
-      else if (action(0) == 'r') {
+      		else if (action(0) == 'r') {
 
         // TODO: get the production to use
-        val index = action.substring(1).toInt
-        val lhs = grammar.getLHS(index)
-        val rhs = grammar.getRHS(index)
+        		val index = action.substring(1).toInt
+        		val lhs = grammar.getLHS(index)
+        		val rhs = grammar.getRHS(index)
 
         // TODO: update the parser's stack
-        stack.trimEnd(rhs.length * 2)
-        state = stack.last.strip().toInt
-        stack.append(lhs)
-        stack.append(slrTable.getGoto(state, lhs))
+				stack.trimEnd(rhs.length * 2)
+				state = stack.last.strip().toInt
+				stack.append(lhs)
+				stack.append(slrTable.getGoto(state, lhs))
 
         // TODO: create a new tree with the "lhs" variable as its label
-        val newTree = new Tree(lhs)
+        		val newTree = new Tree(lhs)
 
         // TODO: add "rhs.length" trees from the right-side of "trees" as children of "newTree"
-        for (tree <- trees.drop(trees.length - rhs.length))
-          newTree.add(tree)
+        		for (tree <- trees.drop(trees.length - rhs.length))
+          			newTree.add(tree)
 
         // TODO: drop "rhs.length" trees from the right-side of "trees"
-        trees.trimEnd(rhs.length)
+        		trees.trimEnd(rhs.length)
 
         // TODO: append "newTree" to the list of "trees"
-        trees.append(newTree)
-      }
+        		trees.append(newTree)
+      		}
       // TODO: implement the "accept" operation
-      else if (action.equals("acc")) {
+      		else if (action.equals("acc")) {
 
         // TODO: create a new tree with the "lhs" of the first production ("start symbol")
-        val newTree = new Tree(grammar.getLHS(0))
+        		val newTree = new Tree(grammar.getLHS(0))
 
         // TODO: add all trees as children of "newTree"
-        for (tree <- trees)
-          newTree.add(tree)
+        		for (tree <- trees)
+          			newTree.add(tree)
 
         // TODO: return "newTree"
-        return newTree
-      }
-      else
-        throw new Exception("Syntax Analyzer Error!")
-    }
-    throw new Exception("Syntax Analyzer Error!")
-  }
+        		return newTree 
+			}
+      		else
+        		throw new Exception("Syntax Analyzer Error!")
+    	}
+    	throw new Exception("Syntax Analyzer Error!")
+  	}
 }
 
 object SyntaxAnalyzer {
@@ -139,35 +141,36 @@ object SyntaxAnalyzer {
   	val GRAMMAR_FILENAME   = "../grammar.txt"
   	val SLR_TABLE_FILENAME = "../parse_table.csv"
 	
-	val TOKEN_PROGRAM         = 0
-    val TOKEN_IDENTIFIER      = 1
-    val TOKEN_INT_LITERAL     = 2
-    val TOKEN_VAR             = 3
-    val TOKEN_TYPE            = 4
-    val TOKEN_BOOLEAN         = 5
-    val TOKEN_BEGIN           = 6
-    val TOKEN_READ            = 7
-    val TOKEN_WRITE           = 8
-    val TOKEN_IF              = 9
-    val TOKEN_THEN            = 10
-    val TOKEN_ELSE            = 11
-    val TOKEN_WHILE           = 12
-    val TOKEN_DO              = 13
-    val TOKEN_COLON           = 14
-    val TOKEN_SEMI_COLON      = 15
-    val TOKEN_ASSIGN          = 16
-    val TOKEN_EQUAL           = 17
-    val TOKEN_PLUS            = 18
-    val TOKEN_MINUS           = 19
-    val TOKEN_MULTIPLIER      = 20
-    val TOKEN_GREATER_THAN    = 21
-    val TOKEN_LESS_THAN       = 22
-    val TOKEN_GREATER_EQUAL   = 23
-    val TOKEN_LESS_EQUAL      = 24
-    val TOKEN_END             = 25
-    val TOKEN_EOF             = 26
+	val TOKEN_PROGRAM         = 1
+    val TOKEN_IDENTIFIER      = 2
+    val TOKEN_INT_LITERAL     = 3
+    val TOKEN_VAR             = 4
+    val TOKEN_TYPE            = 5
+    val TOKEN_BOOLEAN         = 6
+    val TOKEN_BEGIN           = 7
+    val TOKEN_READ            = 8
+    val TOKEN_WRITE           = 9
+    val TOKEN_IF              = 10
+    val TOKEN_THEN            = 11
+    val TOKEN_ELSE            = 12
+    val TOKEN_WHILE           = 13
+    val TOKEN_DO              = 14
+    val TOKEN_COLON           = 15
+    val TOKEN_SEMI_COLON      = 16
+    val TOKEN_ASSIGN          = 17
+    val TOKEN_EQUAL           = 18
+    val TOKEN_PLUS            = 19
+    val TOKEN_MINUS           = 20
+    val TOKEN_MULTIPLIER      = 21
+    val TOKEN_GREATER_THAN    = 22
+    val TOKEN_LESS_THAN       = 23
+    val TOKEN_GREATER_EQUAL   = 24
+    val TOKEN_LESS_EQUAL      = 25
+    val TOKEN_END             = 26
+	val TOKEN_PERIOD		  = 27
+    val TOKEN_EOF             = 0
 
-  	val DEBUG = false
+  	val DEBUG = true
 
   	def main(args: Array[String]): Unit = {
     // check if source file was passed through the command-line
