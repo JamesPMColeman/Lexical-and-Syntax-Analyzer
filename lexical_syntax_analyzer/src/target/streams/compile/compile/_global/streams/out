@@ -1,7 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:169:7: TOKEN_EOF is already defined as value TOKEN_EOF[0m
-[0m[[0m[31merror[0m] [0m[0m  val TOKEN_EOF        = 0[0m
-[0m[[0m[31merror[0m] [0m[0m      ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:174:7: TOKEN_IDENTIFIER is already defined as value TOKEN_IDENTIFIER[0m
-[0m[[0m[31merror[0m] [0m[0m  val TOKEN_IDENTIFIER = 5[0m
-[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:131:9: Unmatched closing brace '}' ignored here[0m
+[0m[[0m[31merror[0m] [0m[0m      		}[0m
+[0m[[0m[31merror[0m] [0m[0m      		^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:133:9: ';' expected but 'else' found.[0m
+[0m[[0m[31merror[0m] [0m[0m      		else if (action.equals("acc")) {[0m
+[0m[[0m[31merror[0m] [0m[0m      		^[0m
 [0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

@@ -38,95 +38,108 @@ class SyntaxAnalyzer(private var source: String) {
 
   	def parse(): Tree = {
 
-    // TODO: create a stack of trees
+    // create a stack of trees
     	val trees: ArrayBuffer[Tree] = new ArrayBuffer[Tree]
 
-    // TODO: initialize the parser's stack of (state, symbol) pairs
+    // initialize the parser's stack of (state, symbol) pairs
     	val stack: ArrayBuffer[String] = new ArrayBuffer[String]
     	stack.append("0")
 
-    // TODO: main parser loop
+    // main parser loop
     	while (true) {
 
       		if (SyntaxAnalyzer.DEBUG)
         		println("stack: " + stack.mkString(","))
 
-      // TODO: update lexeme unit (if needed)
+      // update lexeme unit (if needed)
       		getLexemeUnit()
 
-      // TODO: get current state
+      // get current state
       		var state = stack.last.strip().toInt
       		if (SyntaxAnalyzer.DEBUG)
         		println("state: " + state)
 
-      // TODO: get current token
+      // get current token
       		val token = lexemeUnit.getToken()
 				if (SyntaxAnalyzer.DEBUG)
 					println("Token: " + token)
 
-      // TODO: get action
+      // get action
       		val action = slrTable.getAction(state, token)
       			if (SyntaxAnalyzer.DEBUG)
         			println("action: " + action)
 
-      // TODO: if action is undefined, throw an exception
+      // if action is undefined, throw an exception
       		if (action.length == 0)
         		throw new Exception("Syntax Analyzer Error!")
 
-      // TODO: implement the "shift" operation if the action's prefix is "s"
+      // implement the "shift" operation if the action's prefix is "s"
       		if (action(0) == 's') {
 
-        // TODO: update the parser's stack
+        // update the parser's stack
         		stack.append(token + "")
         		stack.append(action.substring(1))
 
-        // TODO: create a new tree with the lexeme
+        // create a new tree with the lexeme
         		val tree = new Tree(lexemeUnit.getLexeme())
 
-        // TODO: push the new tree onto the stack of trees
+        // push the new tree onto the stack of trees
         		trees.append(tree)
 
-        // TODO: update lexemeUnit to null to acknowledge reading the input
+        // update lexemeUnit to null to acknowledge reading the input
         		lexemeUnit = null
       		}
-      // TODO: implement the "reduce" operation if the action's prefix is "r"
+      // implement the "reduce" operation if the action's prefix is "r"
+/* TODO as of now, if an epsilon production is encountered the code still trims the stack thus loosing 
+		important information and also sending the wrong state to slrTable.getGoto(). An if statement 
+		needs to catch epsilon productions. This will be tricky because the RHS is coming out as java
+		object instead of as a string.*/
       		else if (action(0) == 'r') {
+      			if (SyntaxAnalyzer.REDUCE)
+        			println("R action: " + action)
 
-        // TODO: get the production to use
+        // get the production to use
         		val index = action.substring(1).toInt
         		val lhs = grammar.getLHS(index)
         		val rhs = grammar.getRHS(index)
+      			if (SyntaxAnalyzer.REDUCE)
+        			println("Index: " + index + "\nLHS: " + lhs + "\nRHS: " + rhs(0) +
+							"\nRHS Length: " + rhs.length)
 
-        // TODO: update the parser's stack
-				stack.trimEnd(rhs.length * 2)
-				state = stack.last.strip().toInt
+        // update the parser's stack
+				if (rhs(0) != "#") {
+					stack.trimEnd(rhs.length * 2)
+					state = stack.last.strip().toInt
+      				if (SyntaxAnalyzer.REDUCE)
+        				println("State: " + state + "\nStack: " + stack.mkString(","))
+				}
 				stack.append(lhs)
 				stack.append(slrTable.getGoto(state, lhs))
 
-        // TODO: create a new tree with the "lhs" variable as its label
+        // create a new tree with the "lhs" variable as its label
         		val newTree = new Tree(lhs)
 
-        // TODO: add "rhs.length" trees from the right-side of "trees" as children of "newTree"
+        // add "rhs.length" trees from the right-side of "trees" as children of "newTree"
         		for (tree <- trees.drop(trees.length - rhs.length))
           			newTree.add(tree)
 
-        // TODO: drop "rhs.length" trees from the right-side of "trees"
+        // drop "rhs.length" trees from the right-side of "trees"
         		trees.trimEnd(rhs.length)
 
-        // TODO: append "newTree" to the list of "trees"
+        // append "newTree" to the list of "trees"
         		trees.append(newTree)
       		}
-      // TODO: implement the "accept" operation
+      // implement the "accept" operation
       		else if (action.equals("acc")) {
 
-        // TODO: create a new tree with the "lhs" of the first production ("start symbol")
+        // create a new tree with the "lhs" of the first production ("start symbol")
         		val newTree = new Tree(grammar.getLHS(0))
 
-        // TODO: add all trees as children of "newTree"
+        // add all trees as children of "newTree"
         		for (tree <- trees)
           			newTree.add(tree)
 
-        // TODO: return "newTree"
+        // return "newTree"
         		return newTree 
 			}
       		else
@@ -171,6 +184,7 @@ object SyntaxAnalyzer {
     val TOKEN_EOF             = 0
 
   	val DEBUG = true
+	val REDUCE = false
 
   	def main(args: Array[String]): Unit = {
     // check if source file was passed through the command-line

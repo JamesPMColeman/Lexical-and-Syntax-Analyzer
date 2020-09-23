@@ -1,44 +1,45 @@
-program-> program identifier beginody .
-beginody-> var_sct beginlock
-var_sct-> ''
-var_sct -> v var_dcl var_dcl’
-var_dcl -> ''
-var_dcl-> identifier identifierentifier : t
-var_dcl’-> ''
-var_dcl’-> ; var_dcl var_dcl’
-identifierentifier-> ''
-identifierentifier -> identifier identifierentifier
-beginlock-> begin stmt stmt’ 'end 
-stmt’    -> ''
-stmt’-> ; stmt stmt’
-stmt-> read_stmt
-stmt-> write_stmt
-stmt-> assgn_stmt
-stmt-> if_stmt
-stmt-> while
-stmt-> beginlock
-assgn_stmt-> identifier := expr
-read_stmt-> r identifier
-write_stmt-> wr identifier
-write_stmt-> wr int_literal
-write_stmt-> wr beginool
-if_stmt-> f beginool_expr th stmt exprstmt
-exprstmt-> ''
-exprstmt    -> el stmt
-while -> w beginool_expr d stmt
-expr -> arithm_expr
-expr-> beginool_expr
-arithm_expr -> arithm_expr + term
-arithm_expr -> arithm_expr – term
-arithm_expr -> term
-term   -> term * factor
-term   -> factor
-factor   -> identifier
-factor   -> int_literal
-beginool_expr -> beginool
-beginool_expr -> arithm_expr > arithm_expr
-beginool_expr  -> arithm_expr >= arithm_expr
-beginool_expr  -> arithm_expr = arithm_expr
-beginool_expr  -> arithm_expr <= arithm_expr
-beginool_expr  -> arithm_expr < arithm_expr
+ST	-> P
+P	-> p id B .
+B	-> VS BL
+VS	-> #
+VS 	-> v VD VD’
+VD 	-> #
+VD	-> id ID : t
+VD’	-> #
+VD’	-> ; VD VD’
+ID	-> #
+ID 	-> id ID
+BL	-> b S S’ e
+S’  -> #
+S’	-> ; S S’
+S	-> RS
+S	-> WS
+S	-> AS
+S	-> IF
+S	-> W
+S	-> BL
+AS	-> id := E
+RS	-> r id
+WS	-> wr id
+WS	-> wr int
+WS	-> wr bool
+IF	-> f BE th S ES
+ES	-> #
+ES  -> el S
+W 	-> w BE d S
+E 	-> AE
+E	-> BE
+AE 	-> AE + T
+AE 	-> AE – T
+AE 	-> T
+T  	-> T * F
+T  	-> F
+F  	-> id
+F  	-> int
+BE 	-> bool
+BE 	-> AE > AE
+BE 	-> AE >= AE
+BE 	-> AE = AE
+BE 	-> AE <= AE
+BE 	-> AE < AE
 

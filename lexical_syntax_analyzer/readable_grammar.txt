@@ -1,0 +1,44 @@
+Program-> program identifier body .
+body-> var_sct block
+var_sct-> ''
+var_sct -> v var_dcl var_dcl’
+var_dcl -> ''
+var_dcl-> identifier Identifier : t
+var_dcl’-> ''
+var_dcl’-> ; var_dcl var_dcl’
+Identifier-> ''
+Identifier -> identifier Identifier
+block-> begin stmt stmt’ 'end 
+stmt’    -> ''
+stmt’-> ; stmt stmt’
+stmt-> read_stmt
+stmt-> write_stmt
+stmt-> assgn_stmt
+stmt-> if_stmt
+stmt-> while
+stmt-> block
+assgn_stmt-> identifier := expr
+read_stmt-> r identifier
+write_stmt-> wr identifier
+write_stmt-> wr int_literal
+write_stmt-> wr bool
+if_stmt-> f bool_expr th stmt exprstmt
+else_stmt-> ''
+else_stmt    -> el stmt
+while -> w bool_expr d stmt
+expr -> arithm_expr
+expr-> bool_expr
+arithm_expr -> arithm_expr + term
+arithm_expr -> arithm_expr – term
+arithm_expr -> term
+term   -> term * factor
+term   -> factor
+factor   -> identifier
+factor   -> int_literal
+bool_expr -> bool
+bool_expr -> arithm_expr > arithm_expr
+bool_expr  -> arithm_expr >= arithm_expr
+bool_expr  -> arithm_expr = arithm_expr
+bool_expr  -> arithm_expr <= arithm_expr
+bool_expr  -> arithm_expr < arithm_expr
+
