@@ -1,7 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:131:9: Unmatched closing brace '}' ignored here[0m
-[0m[[0m[31merror[0m] [0m[0m      		}[0m
-[0m[[0m[31merror[0m] [0m[0m      		^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:133:9: ';' expected but 'else' found.[0m
-[0m[[0m[31merror[0m] [0m[0m      		else if (action.equals("acc")) {[0m
-[0m[[0m[31merror[0m] [0m[0m      		^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:122:31: not found: value tree[0m
+[0m[[0m[31merror[0m] [0m[0m					println(newTree + "\n" + tree)[0m
+[0m[[0m[31merror[0m] [0m[0m					                         ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

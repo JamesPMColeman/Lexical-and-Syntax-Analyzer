@@ -79,3 +79,7 @@ run ../test_files/source1.pas
 run ../test_files/source2.pas
 run ../test_files/id_test.pas
 run ../test_files/simple1.pas
+run ../test_files/source2.pas
+run ../test_files/simple1.pas
+run ../test_files/source1.pas
+run ../test_files/simple1.pas

@@ -90,10 +90,6 @@ class SyntaxAnalyzer(private var source: String) {
         		lexemeUnit = null
       		}
       // implement the "reduce" operation if the action's prefix is "r"
-/* TODO as of now, if an epsilon production is encountered the code still trims the stack thus loosing 
-		important information and also sending the wrong state to slrTable.getGoto(). An if statement 
-		needs to catch epsilon productions. This will be tricky because the RHS is coming out as java
-		object instead of as a string.*/
       		else if (action(0) == 'r') {
       			if (SyntaxAnalyzer.REDUCE)
         			println("R action: " + action)
@@ -114,10 +110,16 @@ class SyntaxAnalyzer(private var source: String) {
         				println("State: " + state + "\nStack: " + stack.mkString(","))
 				}
 				stack.append(lhs)
+      			if (SyntaxAnalyzer.REDUCE)
+        			println("State: " + state + "\nStack: " + stack.mkString(","))
 				stack.append(slrTable.getGoto(state, lhs))
+      			if (SyntaxAnalyzer.REDUCE)
+        			println("State: " + state + "\nStack: " + stack.mkString(","))
 
         // create a new tree with the "lhs" variable as its label
         		val newTree = new Tree(lhs)
+				if (SyntaxAnalyzer.REDUCE)
+					println(newTree)
 
         // add "rhs.length" trees from the right-side of "trees" as children of "newTree"
         		for (tree <- trees.drop(trees.length - rhs.length))
@@ -125,7 +127,8 @@ class SyntaxAnalyzer(private var source: String) {
 
         // drop "rhs.length" trees from the right-side of "trees"
         		trees.trimEnd(rhs.length)
-
+				if (SyntaxAnalyzer.REDUCE)
+					println(newTree)
         // append "newTree" to the list of "trees"
         		trees.append(newTree)
       		}
@@ -184,7 +187,7 @@ object SyntaxAnalyzer {
     val TOKEN_EOF             = 0
 
   	val DEBUG = true
-	val REDUCE = false
+	val REDUCE = true
 
   	def main(args: Array[String]): Unit = {
     // check if source file was passed through the command-line
