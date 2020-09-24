@@ -81,7 +81,9 @@ class SyntaxAnalyzer(private var source: String) {
         		stack.append(action.substring(1))
 
         // create a new tree with the lexeme
-        		val tree = new Tree(lexemeUnit.getLexeme())
+				val tree = if (lexemeUnit.getToken() == SyntaxAnalyzer.TOKEN_IDENTIFIER) 
+					new Tree("identifier: " + lexemeUnit.getLexeme()) else
+        			new Tree(lexemeUnit.getLexeme())
 
         // push the new tree onto the stack of trees
         		trees.append(tree)
@@ -117,21 +119,35 @@ class SyntaxAnalyzer(private var source: String) {
         			println("State: " + state + "\nStack: " + stack.mkString(","))
 
         // create a new tree with the "lhs" variable as its label
-        		val newTree = new Tree(lhs)
-				if (SyntaxAnalyzer.REDUCE)
-					println(newTree)
+				if (rhs(0) != "#") {
+					val newTree = new Tree(lhs)
+					if (SyntaxAnalyzer.TREES)
+						println("Entering New Reduction >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +
+								"\nTrees_list: " + trees + "\n======================" + "\nTrees Length: " +
+								trees.length + "\nRHS length: " + rhs.length)
+					if (SyntaxAnalyzer.TREES)
+						println("Trees_list: " + trees + "\n======================")
+						
+				// add "rhs.length" trees from the right-side of "trees" as children of "newTree"
+					for (tree <- trees.drop(trees.length - rhs.length)) 
+						newTree.add(tree)
+					if (SyntaxAnalyzer.TREES)
+						println("Trees_list: " + trees + "\n======================")
+				//	if (SyntaxAnalyzer.TREES)
+				//		println(newTree + "\n======================")
 
-        // add "rhs.length" trees from the right-side of "trees" as children of "newTree"
-        		for (tree <- trees.drop(trees.length - rhs.length))
-          			newTree.add(tree)
-
-        // drop "rhs.length" trees from the right-side of "trees"
-        		trees.trimEnd(rhs.length)
-				if (SyntaxAnalyzer.REDUCE)
-					println(newTree)
-        // append "newTree" to the list of "trees"
-        		trees.append(newTree)
-      		}
+				// drop "rhs.length" trees from the right-side of "trees"
+					trees.trimEnd(rhs.length)
+			//		if (SyntaxAnalyzer.TREES)
+			//			println(newTree + "\n======================")
+					if (SyntaxAnalyzer.TREES)
+						println("Trees_list: " + trees + "\n======================")
+				// append "newTree" to the list of "trees" 
+					trees.append(newTree)
+					if (SyntaxAnalyzer.TREES)
+						println("Trees_list: " + trees + "\n======================")
+      			}
+			}
       // implement the "accept" operation
       		else if (action.equals("acc")) {
 
@@ -186,8 +202,9 @@ object SyntaxAnalyzer {
 	val TOKEN_PERIOD		  = 27
     val TOKEN_EOF             = 0
 
-  	val DEBUG = true
-	val REDUCE = true
+  	val DEBUG  = false
+	val REDUCE = false
+	val TREES  = true
 
   	def main(args: Array[String]): Unit = {
     // check if source file was passed through the command-line

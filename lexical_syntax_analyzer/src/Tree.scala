@@ -8,23 +8,23 @@ import scala.collection.mutable.ArrayBuffer
 
 class Tree(var label: String) {
 
-  private val branches: ArrayBuffer[Tree] = new ArrayBuffer[Tree]
+  	private val branches: ArrayBuffer[Tree] = new ArrayBuffer[Tree]
 
-  def add(branch: Tree): Unit = branches.append(branch)
+  	def add(branch: Tree): Unit = branches.append(branch)
 
-  private def print(current: Tree, tabs: String): String = {
-    var out = ""
-    if (current == null)
-      out
-    else {
-      out += tabs + current.label + "\n"
-      for (branch <- current.branches)
-        out += print(branch, tabs + "\t")
-      out
-    }
-  }
+  	private def print(current: Tree, tabs: String): String = {
+    	var out = ""
+    	if (current == null)
+      		out
+    	else {
+      		out += tabs + current.label + "\n"
+      		for (branch <- current.branches)
+        		out += print(branch, tabs + "\t")
+      		out
+    	}
+  	}
 
-  override def toString = print(this, "")
+  	override def toString = print(this, "")
 }
 
 // example code

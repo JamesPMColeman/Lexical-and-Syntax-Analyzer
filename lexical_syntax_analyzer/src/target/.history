@@ -83,3 +83,6 @@ run ../test_files/source2.pas
 run ../test_files/simple1.pas
 run ../test_files/source1.pas
 run ../test_files/simple1.pas
+run ../test_files/Simple1.pas
+run ../test_files/Source1.pas
+run ../test_files/Simple1.pas
