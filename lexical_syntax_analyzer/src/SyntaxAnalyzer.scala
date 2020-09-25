@@ -130,7 +130,7 @@ class SyntaxAnalyzer(private var source: String) {
         			println("State: " + state + "\nStack: " + stack.mkString(","))
 
         // create a new tree with the "lhs" variable as its label
-				if (rhs(0) != "#" && lhs != "ID" && lhs != "VD’" && lhs != "S’" && lhs != "ES") {
+				if (rhs(0) != "#" && lhs != "ID" && lhs != "var_dct’" && lhs != "stmt’" && lhs != "ES") {
 
 					if (SyntaxAnalyzer.TREES)
 						println("Entering New Reduction >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +
@@ -139,15 +139,15 @@ class SyntaxAnalyzer(private var source: String) {
 					val newTree = new Tree(lhs)
 					var snip = 0
 
-					if (lhs == "B") {
+					if (lhs == "body") {
 						for (tree <- trees)
-							if (tree.label == "VS")
+							if (tree.label == "var_sct")
 								snip += 1
 						snip += 1
 					}	
-					else if (lhs == "BL") {	
+					else if (lhs == "block") {	
 						for (tree <- trees) {
-							if (tree.label == "S")
+							if (tree.label == "stmt")
 								snip += 2
 							if (tree.label == "begin")
 								snip = 0
@@ -160,17 +160,17 @@ class SyntaxAnalyzer(private var source: String) {
 								snip += 1
 						snip -= 1
 					}
-					else if (lhs == "VD") {
+					else if (lhs == "var_dct") {
 						for (tree <- trees) 
 							if (tree.label.contains("id") || tree.label.contains("ty"))
 								snip += 1
 					}
-					else if (lhs == "VS") {
+					else if (lhs == "var_sct") {
 						for (tree <- trees) 
-							if (tree.label.contains("VD"))
+							if (tree.label.contains("var_dct"))
 								snip += 2
 					}
-					else if (lhs == "IF") {
+					else if (lhs == "if_stmt") {
 						for (tree <- trees) { 
 							if (tree.label.contains("else"))
 								snip += 2
@@ -248,7 +248,7 @@ object SyntaxAnalyzer {
 
   	val DEBUG  = false
 	val REDUCE = false
-	val TREES  = false
+	val TREES  = true
 
   	def main(args: Array[String]): Unit = {
     // check if source file was passed through the command-line

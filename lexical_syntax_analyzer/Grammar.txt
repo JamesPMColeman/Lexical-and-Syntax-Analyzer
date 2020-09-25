@@ -1,45 +1,45 @@
-ST	-> P
-P	-> p id B .
-B	-> VS BL
-VS	-> #
-VS 	-> v VD VD’
-VD 	-> #
-VD	-> id ID : t
-VD’	-> #
-VD’	-> ; VD VD’
+stmtterm	-> Program
+Program	-> p id body .
+body	-> var_sct block
+var_sct	-> #
+var_sct 	-> v var_dct var_dct’
+var_dct 	-> #
+var_dct	-> id ID : t
+var_dct’	-> #
+var_dct’	-> ; var_dct var_dct’
 ID	-> #
 ID 	-> id ID
-BL	-> b S S’ e
-S’  -> #
-S’	-> ; S S’
-S	-> RS
-S	-> WS
-S	-> AS
-S	-> IF
-S	-> W
-S	-> BL
-AS	-> id := E
-RS	-> r id
-WS	-> wr id
-WS	-> wr int
-WS	-> wr bool
-IF	-> f BE th S ES
+block	-> b stmt stmt’ e
+stmt’  -> #
+stmt’	-> ; stmt stmt’
+stmt	-> read_stmt
+stmt	-> write_stmt
+stmt	-> assgn_stmt
+stmt	-> if_stmt
+stmt	-> while_stmt
+stmt	-> block
+assgn_stmt	-> id := expr
+read_stmt	-> r id
+write_stmt	-> wr id
+write_stmt	-> wr int
+write_stmt	-> wr bool
+if_stmt	-> f bool_expr th stmt ES
 ES	-> #
-ES  -> el S
-W 	-> w BE d S
-E 	-> AE
-E	-> BE
-AE 	-> AE + T
-AE 	-> AE – T
-AE 	-> T
-T  	-> T * F
-T  	-> F
-F  	-> id
-F  	-> int
-BE 	-> bool
-BE 	-> AE > AE
-BE 	-> AE >= AE
-BE 	-> AE = AE
-BE 	-> AE <= AE
-BE 	-> AE < AE
+ES  -> el stmt
+while_stmt 	-> w bool_expr d stmt
+expr 	-> arithm_expr
+expr	-> bool_expr
+arithm_expr 	-> arithm_expr + term
+arithm_expr 	-> arithm_expr – term
+arithm_expr 	-> term
+term  	-> term * factor
+term  	-> factor
+factor  	-> id
+factor  	-> int
+bool_expr 	-> bool
+bool_expr 	-> arithm_expr > arithm_expr
+bool_expr 	-> arithm_expr >= arithm_expr
+bool_expr 	-> arithm_expr = arithm_expr
+bool_expr 	-> arithm_expr <= arithm_expr
+bool_expr 	-> arithm_expr < arithm_expr
 
