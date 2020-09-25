@@ -1,4 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:155:47: value label is not a member of scala.collection.mutable.ArrayBuffer[Tree][0m
-[0m[[0m[31merror[0m] [0m[0m							if (tree.label.contains("id") || trees.label.contains("ty"))[0m
-[0m[[0m[31merror[0m] [0m[0m							                                       ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:89:48: ')' expected but '.' found.[0m
+[0m[[0m[31merror[0m] [0m[0m					new Tree("bool_literal: " + "'" lexemeUnit.getLexeme() + "'")[0m
+[0m[[0m[31merror[0m] [0m[0m					                                          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:89:66: ';' expected but ')' found.[0m
+[0m[[0m[31merror[0m] [0m[0m					new Tree("bool_literal: " + "'" lexemeUnit.getLexeme() + "'")[0m
+[0m[[0m[31merror[0m] [0m[0m					                                                            ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

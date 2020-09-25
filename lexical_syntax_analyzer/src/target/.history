@@ -110,3 +110,6 @@ run ../test_files/Source1.pas
 run ../test_files/Source2.pas
 run ../test_files/Source1.pas
 run ../test_files/Source2.pas
+run ../test_files/Source3.pas
+run ../test_files/Source2.pas
+run ../test_files/Source1.pas
