@@ -84,9 +84,15 @@ class SyntaxAnalyzer(private var source: String) {
 				val tree = if (lexemeUnit.getToken() == SyntaxAnalyzer.TOKEN_IDENTIFIER) 
 					new Tree("identifier: " + lexemeUnit.getLexeme()) else
         			new Tree(lexemeUnit.getLexeme())
-
         // push the new tree onto the stack of trees
-        		trees.append(tree)
+		// handle Integer and Boolean being leaves of type
+				val typeTree = new Tree("type")
+				if (tree.label == "Integer" || tree.label == "Boolean") {
+					typeTree.add(tree)
+					trees.append(typeTree)
+				}
+				else
+        			trees.append(tree)
 
         // update lexemeUnit to null to acknowledge reading the input
         		lexemeUnit = null
@@ -119,25 +125,55 @@ class SyntaxAnalyzer(private var source: String) {
         			println("State: " + state + "\nStack: " + stack.mkString(","))
 
         // create a new tree with the "lhs" variable as its label
-				if (rhs(0) != "#") {
+				if (rhs(0) != "#" && lhs != "ID" && lhs != "VD’" && lhs != "S’") {
 					val newTree = new Tree(lhs)
 					if (SyntaxAnalyzer.TREES)
 						println("Entering New Reduction >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +
 								"\nTrees_list: " + trees + "\n======================" + "\nTrees Length: " +
 								trees.length + "\nRHS length: " + rhs.length)
-					if (SyntaxAnalyzer.TREES)
-						println("Trees_list: " + trees + "\n======================")
-						
+					var snip = 0
+					if (lhs == "B") {
+						for (tree <- trees)
+							if (tree.label == "VS")
+								snip += 1
+						snip += 1
+					}	
+					else if (lhs == "BL") {
+						for (tree <- trees)
+							if (tree.label == "S")
+								snip += 2
+						snip += 1 
+					}
+					else if (lhs == "ID") {
+						for (tree <- trees) 
+							if (tree.label.contains("id"))
+								snip += 1
+						snip -= 1
+					}
+					else if (lhs == "VD") {
+						for (tree <- trees) 
+							if (tree.label.contains("id") || tree.label.contains("ty"))
+								snip += 1
+					}
+					else if (lhs == "VS") {
+						for (tree <- trees) 
+							if (tree.label.contains("VD"))
+								snip += 2
+					}
+					else 
+						snip = rhs.length		
 				// add "rhs.length" trees from the right-side of "trees" as children of "newTree"
-					for (tree <- trees.drop(trees.length - rhs.length)) 
+					for (tree <- trees.drop(trees.length - snip)) {
+						println("Tree node: " + tree.label)
 						newTree.add(tree)
-					if (SyntaxAnalyzer.TREES)
+					}
+					if (true)
 						println("Trees_list: " + trees + "\n======================")
 				//	if (SyntaxAnalyzer.TREES)
 				//		println(newTree + "\n======================")
 
 				// drop "rhs.length" trees from the right-side of "trees"
-					trees.trimEnd(rhs.length)
+					trees.trimEnd(snip)
 			//		if (SyntaxAnalyzer.TREES)
 			//			println(newTree + "\n======================")
 					if (SyntaxAnalyzer.TREES)
@@ -152,14 +188,14 @@ class SyntaxAnalyzer(private var source: String) {
       		else if (action.equals("acc")) {
 
         // create a new tree with the "lhs" of the first production ("start symbol")
-        		val newTree = new Tree(grammar.getLHS(0))
+       /* 		val newTree = new Tree(grammar.getLHS(0))
 
         // add all trees as children of "newTree"
         		for (tree <- trees)
           			newTree.add(tree)
-
+		*/
         // return "newTree"
-        		return newTree 
+        		return trees(0) 
 			}
       		else
         		throw new Exception("Syntax Analyzer Error!")

@@ -169,7 +169,7 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 							while (input.length > 0 && digitsLeft) {
 								c = input(0)
 								charClass = getCharClass(c)
-								if (charClass == CharClass.SYMBOL) {
+								if (charClass == CharClass.DIGIT) {
 									lexeme += c
 									input = input.substring(1)
 								}

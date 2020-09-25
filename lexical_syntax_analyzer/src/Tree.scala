@@ -19,7 +19,7 @@ class Tree(var label: String) {
     	else {
       		out += tabs + current.label + "\n"
       		for (branch <- current.branches)
-        		out += print(branch, tabs + "\t")
+        		out += print(branch, tabs + "    ")
       		out
     	}
   	}

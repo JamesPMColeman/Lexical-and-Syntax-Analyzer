@@ -1,10 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:125:15: unclosed string literal[0m
-[0m[[0m[31merror[0m] [0m[0m						println("Entering New Reduction >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>[0m
-[0m[[0m[31merror[0m] [0m[0m						        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:126:81: unclosed string literal[0m
-[0m[[0m[31merror[0m] [0m[0m								\nTrees_list: " + trees + "\n======================" + "\nTrees Length: " +[0m
-[0m[[0m[31merror[0m] [0m[0m								                                                                        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:149:10: ')' expected but '}' found.[0m
-[0m[[0m[31merror[0m] [0m[0m      			}[0m
-[0m[[0m[31merror[0m] [0m[0m      			^[0m
-[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:155:47: value label is not a member of scala.collection.mutable.ArrayBuffer[Tree][0m
+[0m[[0m[31merror[0m] [0m[0m							if (tree.label.contains("id") || trees.label.contains("ty"))[0m
+[0m[[0m[31merror[0m] [0m[0m							                                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
