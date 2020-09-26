@@ -165,3 +165,16 @@ run ../test_files/test_else.pass
 run ../test_files/multi_else.pass
 run ../test_files/multi_else.pas
 run ../test_files/bool_expr.pas
+run ../test_files/multi_else.pas
+run ../test_files/no_program.pas
+run ../test_files/source2.pas
+run ../test_files/source1.pas
+run ../test_files/source2.pas
+run ../test_files/source3.pas
+run ../test_files/source4.pas
+run ../test_files/source5.pas
+run ../test_files/source6.pas
+run ../test_files/source7.pas
+run ../test_files/unexpected.pas
+run ../test_files/semicolon_test.pas
+run ../test_files/var_test2.pas

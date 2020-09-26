@@ -207,6 +207,8 @@ class SyntaxAnalyzer(private var source: String) {
 					case "11" => throw new Exception("Syntax Analyzer Error: end expected!")
 					case "12" => throw new Exception("Syntax Analyzer Error: EOF expected!")
 					case "13" => throw new Exception("Syntax Analyzer Error: program expected!")
+					case "14" => throw new Exception("Syntax Analyzer Error: unexpected symbol: " + lexemeUnit.getLexeme)
+					case "15" => throw new Exception("Syntax Analyzer Error: semicolon expected!")
 				}
 			}
 			// implement the "accept" operation

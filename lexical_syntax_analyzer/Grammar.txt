@@ -1,4 +1,4 @@
-stmtterm	-> Program
+st	-> Program
 Program	-> p id body .
 body	-> var_sct block
 var_sct	-> #
