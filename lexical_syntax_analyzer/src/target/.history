@@ -158,3 +158,10 @@ run ../test_files/source14.pas
 run ../test_files/source15.pas
 run ../test_files/no_program.pas
 run ../test_files/source3.pas
+run ../test_files/source1.pas
+run ../test_files/source2.pas
+run ../test_files/source3.pas
+run ../test_files/test_else.pass
+run ../test_files/multi_else.pass
+run ../test_files/multi_else.pas
+run ../test_files/bool_expr.pas

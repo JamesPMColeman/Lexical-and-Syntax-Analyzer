@@ -157,6 +157,7 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 								case "*" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_MULTIPLIER)
 								case ">" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_GREATER_THAN)
 								case "<" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_LESS_THAN)
+								case "=" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_EQUAL)
 								case "<=" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_LESS_EQUAL)
 								case ">=" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_GREATER_EQUAL)
 								case ":=" => return new LexemeUnit(lexeme, SyntaxAnalyzer.TOKEN_ASSIGN)
