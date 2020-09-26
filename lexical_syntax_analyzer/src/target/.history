@@ -126,3 +126,12 @@ run ../test_files/Source2.pas
 run ../test_files/Source1.pas
 run ../test_files/Source2.pas
 run ../test_files/Source3.pas
+run ../test_files/Source4.pas
+run ../test_files/Source5.pas
+run ../test_files/Source6.pas
+run ../test_files/Source7.pas
+run ../test_files/Source8.pas
+run ../test_files/Source9.pas
+run ../test_files/Source8.pas
+run ../test_files/Source9.pas
+run ../test_files/Source10.pas
