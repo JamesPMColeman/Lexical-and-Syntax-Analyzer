@@ -82,29 +82,39 @@ class SyntaxAnalyzer(private var source: String) {
 
         // create a new tree with the lexeme
 				val tree = if (lexemeUnit.getToken() == SyntaxAnalyzer.TOKEN_IDENTIFIER) 
-					new Tree("identifier: " + lexemeUnit.getLexeme()) else
+					new Tree("identifier: " + "'" + lexemeUnit.getLexeme() + "'") 
+					else if (lexemeUnit.getToken() == SyntaxAnalyzer.TOKEN_INT_LITERAL)
+					new Tree("int_literal: " + "'" + lexemeUnit.getLexeme() + "'")
+					else if (lexemeUnit.getToken() == SyntaxAnalyzer.TOKEN_BOOLEAN)
+					new Tree("bool_literal: " + "'" + lexemeUnit.getLexeme() + "'")
+					else
         			new Tree(lexemeUnit.getLexeme())
-
         // push the new tree onto the stack of trees
-        		trees.append(tree)
+		// handle Integer and Boolean being leaves of type
+				val typeTree = new Tree("type")
+				if (tree.label == "Integer" || tree.label == "Boolean") {
+					typeTree.add(tree)
+					trees.append(typeTree)
+				}
+				else
+        			trees.append(tree)
 
         // update lexemeUnit to null to acknowledge reading the input
         		lexemeUnit = null
       		}
-      // implement the "reduce" operation if the action's prefix is "r"
+      		// implement the "reduce" operation if the action's prefix is "r"
       		else if (action(0) == 'r') {
       			if (SyntaxAnalyzer.REDUCE)
         			println("R action: " + action)
 
-        // get the production to use
+        		// get the production to use
         		val index = action.substring(1).toInt
         		val lhs = grammar.getLHS(index)
         		val rhs = grammar.getRHS(index)
-      			if (SyntaxAnalyzer.REDUCE)
-        			println("Index: " + index + "\nLHS: " + lhs + "\nRHS: " + rhs(0) +
-							"\nRHS Length: " + rhs.length)
-
-        // update the parser's stack
+      			if (SyntaxAnalyzer.REDUCE) {
+        			println("Index: " + index + "\nLHS: " + lhs + "\nRHS: " + rhs(0) + "\nRHS Length: " + rhs.length)
+				}
+        		// update the parser's stack
 				if (rhs(0) != "#") {
 					stack.trimEnd(rhs.length * 2)
 					state = stack.last.strip().toInt
@@ -118,48 +128,92 @@ class SyntaxAnalyzer(private var source: String) {
       			if (SyntaxAnalyzer.REDUCE)
         			println("State: " + state + "\nStack: " + stack.mkString(","))
 
-        // create a new tree with the "lhs" variable as its label
-				if (rhs(0) != "#") {
-					val newTree = new Tree(lhs)
+        		// create a new tree with the "lhs" variable as its label
+				if (rhs(0) != "#" && lhs != "ID" && lhs != "var_dct’" && lhs != "stmt’" && lhs != "ES") {
+
 					if (SyntaxAnalyzer.TREES)
 						println("Entering New Reduction >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +
-								"\nTrees_list: " + trees + "\n======================" + "\nTrees Length: " +
-								trees.length + "\nRHS length: " + rhs.length)
-					if (SyntaxAnalyzer.TREES)
-						println("Trees_list: " + trees + "\n======================")
-						
-				// add "rhs.length" trees from the right-side of "trees" as children of "newTree"
-					for (tree <- trees.drop(trees.length - rhs.length)) 
-						newTree.add(tree)
-					if (SyntaxAnalyzer.TREES)
-						println("Trees_list: " + trees + "\n======================")
-				//	if (SyntaxAnalyzer.TREES)
-				//		println(newTree + "\n======================")
+								"\nTrees Length: " + trees.length + "\nRHS length: " + rhs.length)
 
-				// drop "rhs.length" trees from the right-side of "trees"
-					trees.trimEnd(rhs.length)
-			//		if (SyntaxAnalyzer.TREES)
-			//			println(newTree + "\n======================")
-					if (SyntaxAnalyzer.TREES)
-						println("Trees_list: " + trees + "\n======================")
-				// append "newTree" to the list of "trees" 
+					val newTree = new Tree(lhs)
+					var snip = 0
+
+					if (lhs == "body") {
+						for (tree <- trees)
+							if (tree.label == "var_sct")
+								snip += 1
+						snip += 1
+					}	
+					else if (lhs == "block") {	
+						for (tree <- trees) {
+							if (tree.label == "stmt")
+								snip += 2
+							if (tree.label == "begin")
+								snip = 0
+						}
+					snip += 1 
+					}
+					else if (lhs == "ID") {
+						for (tree <- trees) 
+							if (tree.label.contains("id"))
+								snip += 1
+						snip -= 1
+					}
+					else if (lhs == "var_dct") {
+						for (tree <- trees) 
+							if (tree.label.contains("id") || tree.label.contains("ty"))
+								snip += 1
+					}
+					else if (lhs == "var_sct") {
+						for (tree <- trees) 
+							if (tree.label.contains("var_dct"))
+								snip += 2
+					}
+					else if (lhs == "if_stmt") {
+						for (tree <- trees) { 
+							if (tree.label.contains("else"))
+								snip += 2
+						}
+						snip += 4
+					}
+					else 
+						snip = rhs.length		
+					// add "rhs.length" trees from the right-side of "trees" as children of "newTree"
+					for (tree <- trees.drop(trees.length - snip)) {
+						newTree.add(tree)
+					}
+
+					// drop "rhs.length" trees from the right-side of "trees"
+					trees.trimEnd(snip)
+					// append "newTree" to the list of "trees" 
 					trees.append(newTree)
 					if (SyntaxAnalyzer.TREES)
 						println("Trees_list: " + trees + "\n======================")
       			}
 			}
-      // implement the "accept" operation
+			else if (action(0) == 'e') {
+				val err = action.substring(1)
+				err match {
+					case "1" => throw new Exception("Syntax Analyzer Error: identifier expected!")
+					case "2" => throw new Exception("Syntax Analyzer Error: begin expected!")
+					case "3" => throw new Exception("Syntax Analyzer Error: colon expected!")
+					case "4" => throw new Exception("Syntax Analyzer Error: assignment expected!")
+					case "5" => throw new Exception("Syntax Analyzer Error: type expected!")
+					case "6" => throw new Exception("Syntax Analyzer Error: do expected!")
+					case "7" => throw new Exception("Syntax Analyzer Error: relational operator expected!")
+					case "8" => throw new Exception("Syntax Analyzer Error: period expected!")
+					case "9" => throw new Exception("Syntax Analyzer Error: identifier or int literal expected!")
+					case "10" => throw new Exception("Syntax Analyzer Error: then expected!")
+					case "11" => throw new Exception("Syntax Analyzer Error: end expected!")
+					case "12" => throw new Exception("Syntax Analyzer Error: EOF expected!")
+					case "13" => throw new Exception("Syntax Analyzer Error: program expected!")
+					case "14" => throw new Exception("Syntax Analyzer Error: unexpected symbol: " + lexemeUnit.getLexeme)
+					case "15" => throw new Exception("Syntax Analyzer Error: semicolon expected!")
+				}
+			}
+			// implement the "accept" operation
       		else if (action.equals("acc")) {
-
-        // create a new tree with the "lhs" of the first production ("start symbol")
-        		val newTree = new Tree(grammar.getLHS(0))
-
-        // add all trees as children of "newTree"
-        		for (tree <- trees)
-          			newTree.add(tree)
-
-        // return "newTree"
-        		return newTree 
+        		return trees(0) 
 			}
       		else
         		throw new Exception("Syntax Analyzer Error!")
@@ -202,8 +256,8 @@ object SyntaxAnalyzer {
 	val TOKEN_PERIOD		  = 27
     val TOKEN_EOF             = 0
 
-  	val DEBUG  = false
-	val REDUCE = false
+  	val DEBUG  = true
+	val REDUCE = true
 	val TREES  = true
 
   	def main(args: Array[String]): Unit = {
