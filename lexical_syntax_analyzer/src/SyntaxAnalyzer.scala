@@ -192,13 +192,21 @@ class SyntaxAnalyzer(private var source: String) {
       			}
 			}
 			else if (action(0) == 'e') {
-				action(1) match {
-					case '1' => throw new Exception("Syntax Analyzer Error: identifier expected!")
-					case '2' => throw new Exception("Syntax Analyzer Error: var expected!")
-					case '3' => throw new Exception("Syntax Analyzer Error: colon expected!")
-					case '4' => throw new Exception("Syntax Analyzer Error: assign expected!")
-					case '5' => throw new Exception("Syntax Analyzer Error: type expected!")
-					case '6' => throw new Exception("Syntax Analyzer Error: do expected!")
+				val err = action.substring(1)
+				err match {
+					case "1" => throw new Exception("Syntax Analyzer Error: identifier expected!")
+					case "2" => throw new Exception("Syntax Analyzer Error: begin expected!")
+					case "3" => throw new Exception("Syntax Analyzer Error: colon expected!")
+					case "4" => throw new Exception("Syntax Analyzer Error: assignment expected!")
+					case "5" => throw new Exception("Syntax Analyzer Error: type expected!")
+					case "6" => throw new Exception("Syntax Analyzer Error: do expected!")
+					case "7" => throw new Exception("Syntax Analyzer Error: relational operator expected!")
+					case "8" => throw new Exception("Syntax Analyzer Error: period expected!")
+					case "9" => throw new Exception("Syntax Analyzer Error: identifier or int literal expected!")
+					case "10" => throw new Exception("Syntax Analyzer Error: then expected!")
+					case "11" => throw new Exception("Syntax Analyzer Error: end expected!")
+					case "12" => throw new Exception("Syntax Analyzer Error: EOF expected!")
+					case "13" => throw new Exception("Syntax Analyzer Error: program expected!")
 				}
 			}
 			// implement the "accept" operation

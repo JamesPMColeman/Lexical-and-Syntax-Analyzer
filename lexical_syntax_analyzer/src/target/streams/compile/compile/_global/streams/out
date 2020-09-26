@@ -1,11 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:196:11: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : String("1")[0m
-[0m[[0m[31merror[0m] [0m[0m required: Char[0m
-[0m[[0m[31merror[0m] [0m[0m					case "1" => throw new Exception("Syntax Analyzer Error: identifier expected!")[0m
-[0m[[0m[31merror[0m] [0m[0m					     ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:197:11: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : String("2")[0m
-[0m[[0m[31merror[0m] [0m[0m required: Char[0m
-[0m[[0m[31merror[0m] [0m[0m					case "2" => throw new Exception("Syntax Analyzer Error: var expected!")[0m
-[0m[[0m[31merror[0m] [0m[0m					     ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:195:5: not found: value err[0m
+[0m[[0m[31merror[0m] [0m[0m				err = action.substring(1)[0m
+[0m[[0m[31merror[0m] [0m[0m				^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
