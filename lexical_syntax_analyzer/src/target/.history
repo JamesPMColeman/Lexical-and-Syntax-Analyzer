@@ -136,8 +136,6 @@ run ../test_files/Source8.pas
 run ../test_files/Source9.pas
 run ../test_files/Source10.pas
 run ../test_files/Source1.pas
-<<<<<<< HEAD
-=======
 run ../test_files/Source2.pas
 run ../test_files/Source1.pas
 run ../test_files/source1.pas
@@ -180,4 +178,15 @@ run ../test_files/source7.pas
 run ../test_files/unexpected.pas
 run ../test_files/semicolon_test.pas
 run ../test_files/var_test2.pas
->>>>>>> I_will_not_screw_this_branch_up
+run ../test_files/source1.pas
+run ../test_files/source2.pas
+run ../test_files/source3.pas
+run ../test_files/source4.pas
+run ../test_files/source5.pas
+run
+run ../test_files/source1.pas
+run ../test_files/source2.pas
+run ../test_files/source3.pas
+run ../test_files/var_test.pas
+run ../test_files/var_test2.pas
+run ../test_files/var_section.pas

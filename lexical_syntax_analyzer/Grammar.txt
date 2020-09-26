@@ -3,7 +3,6 @@ Program	-> p id body .
 body	-> var_sct block
 var_sct	-> #
 var_sct 	-> v var_dct var_dct’
-var_dct 	-> #
 var_dct	-> id ID : t
 var_dct’	-> #
 var_dct’	-> ; var_dct var_dct’
