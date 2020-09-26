@@ -135,3 +135,9 @@ run ../test_files/Source9.pas
 run ../test_files/Source8.pas
 run ../test_files/Source9.pas
 run ../test_files/Source10.pas
+run ../test_files/Source1.pas
+run ../test_files/Source2.pas
+run ../test_files/Source1.pas
+run ../test_files/source1.pas
+run ../test_files/source2.pas
+run ../test_files/source3.pas
