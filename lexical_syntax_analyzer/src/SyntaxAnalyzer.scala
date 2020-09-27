@@ -211,7 +211,7 @@ class SyntaxAnalyzer(private var source: String) {
 					case "15" => throw new Exception("Syntax Analyzer Error: semicolon expected!")
 					case "16" => throw new Exception("Syntax Analyzer Error: identifier, int literal or boolean literal expected!")
 					case "17" => throw new Exception("Syntax Analyzer Error: identifier or colon expected!")
-					case "18" => throw new Exception("Syntax Analyzer Error: addition subtraction or boolean operator expected!")
+					case "18" => throw new Exception("Syntax Analyzer Error: addition, subtraction or relational operator expected!")
 				}
 			}
 			// implement the "accept" operation
