@@ -9,19 +9,35 @@ import scala.collection.mutable.ArrayBuffer
  * Description: Activity 09 - Syntax Analyzer
  */
 
-/*
-expression  = term expression'
-expression' = ( ´+´  | ´-´ ) term expression' | epsilon
-term        = factor term'
-term'       = ( ´*´ | ´/´ ) factor term' | epsilon
-factor      = identifier | literal | ´(´ expression ´)´
-identifier  = letter { ( letter | digit ) }
-letter      = ´a´ | ´b´ | ´c´ | ´d´ | ´e´ | ´f´ | ´g´ | ´h´ | ´i´ | ´j´ | ´k´ | ´l´ | ´m´
-| ´n´ | ´o´ | ´p´ | ´q´ | ´r´ | ´s´ | ´t´ | ´u´ | ´v´ | ´w´ | ´x´ | ´y´ | ´z´
-literal     = digit { digit }
-digit       = ´0´ | ´1´ | ´2´ | ´3´ | ´4´ | ´5´ | ´6´ | ´7´ | ´8´ | ´9´
- */
+/* |||||||| Grammar |||||||| 
 
+    program      = ´program´ identifier body ´.´ 
+    identifier   = letter { ( letter | digit ) } 
+    body         = [ var_sct ] block 
+    var_sct      = ´var´ var_dcl { ´;´ var_dcl } 
+    var_dcl      = identifier { identifier } ´:´ type 
+    type         = ´Integer´ | ´Boolean´ 
+    block        = ´begin´ stmt { ´;´ stmt } ´end´ 
+    stmt         = assgm_stmt | read_stmt | write_stmt | if_stmt | while_stmt | block 
+    assgm_stmt   = identifier ´:=´ expr 
+    read_stmt    = ´read´ identifier 
+    write_stmt   = ´write´ ( identifier | literal ) 
+    if_stmt      = ´if´ bool_expr ´then´ stmt [ ´else´ stmt ] 
+    while_stmt   = ´while´ bool_expr ´do´ stmt expr = arithm_expr | bool_expr 
+    arithm_expr  = arithm_expr ( ´+´ | ´-´ ) term | term 
+    term         = term ´*´ factor | factor 
+    factor       = identifier | int_literal 
+    literal      = int_literal | bool_literal 
+    int_literal  = digit { digit } 
+    bool_litreal = ´true´ | ´false´ 
+    bool_expr    = bool_literal 
+                 | arithm_expr ( ´>´ | ´>=´ | ´=´ | ´<=´ | ´<´ ) arithm_expr 
+    letter       = ´a´ | ´b´ | ´c´ | ´d´ | ´e´ | ´f´ | ´g´ | ´h´ | ´i´ | ´j´ | ´k´ | ´l´ 
+                 | ´m´ | ´n´ | ´o´ | ´p´ | ´q´ | ´r´ | ´s´ | ´t´ | ´u´ | ´v´ | ´w´ | ´x´ 
+                 | ´y´ | ´z´ | also upper case letters 
+    digit        = ´0´ | ´1´ | ´2´ | ´3´ | ´4´ | ´5´ | ´6´ | ´7´ | ´8´ | ´9´
+ 
+*/
 class SyntaxAnalyzer(private var source: String) {
 
   	private val it = new LexicalAnalyzer(source).iterator
@@ -259,9 +275,9 @@ object SyntaxAnalyzer {
     val TOKEN_LESS_THAN       = 27
     val TOKEN_EOF             = 0
 
-  	val DEBUG  = true
-	val REDUCE = true
-	val TREES  = true
+  	val DEBUG  = false
+	val REDUCE = false
+	val TREES  = false
 
   	def main(args: Array[String]): Unit = {
     // check if source file was passed through the command-line

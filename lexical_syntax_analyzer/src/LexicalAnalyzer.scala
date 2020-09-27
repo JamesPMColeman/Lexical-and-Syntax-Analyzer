@@ -3,8 +3,8 @@ import scala.io.Source
 /*
  * James Coleman
  * CS3210
- * Homework3 Lexecal Analyze class and Main class
- * September 6th, 2020
+ * Programming Assignment 01
+ * September 26th, 2020
  *
  */
 
@@ -24,7 +24,7 @@ import scala.io.Source
 	var_sct 	 = ´var´ var_dcl { ´;´ var_dcl } 
 	var_dcl 	 = identifier { identifier } ´:´ type 
 	type 		 = ´Integer´ | ´Boolean´ 
-	block 		 = ´begin´ stmt { ´;´ stmt } end 
+	block 		 = ´begin´ stmt { ´;´ stmt } ´end´ 
 	stmt 		 = assgm_stmt | read_stmt | write_stmt | if_stmt | while_stmt | block 
 	assgm_stmt 	 = identifier ´:=´ expr 
 	read_stmt 	 = ´read´ identifier 
@@ -50,7 +50,6 @@ class LexicalAnalyzer(private var source: String) extends Iterable[LexemeUnit] {
 
 	private var input = ""
   	for (line <- Source.fromFile(source).getLines) {
-		println(line)
    		input += line + "\n"
 	}
 
