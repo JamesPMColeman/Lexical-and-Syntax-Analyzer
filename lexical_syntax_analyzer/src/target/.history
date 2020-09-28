@@ -257,3 +257,5 @@ run ../test_files/source7.pas
 run ../test_files/source14.pas
 run ../test_files/source3.pas
 run ../test_files/source12.pas
+run ../test_files/source2.pas
+run ../test_files/source1.pas

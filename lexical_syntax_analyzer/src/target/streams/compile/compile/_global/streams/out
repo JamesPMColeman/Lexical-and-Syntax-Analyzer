@@ -1,4 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/jamescoleman/Programming/scala/Project1/lexical_syntax_analyzer/src/SyntaxAnalyzer.scala:195:5: not found: value err[0m
-[0m[[0m[31merror[0m] [0m[0m				err = action.substring(1)[0m
-[0m[[0m[31merror[0m] [0m[0m				^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
